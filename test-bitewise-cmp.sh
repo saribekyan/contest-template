@@ -32,7 +32,7 @@ else
     TESTS=problems/$problem/tests/$onlytest
 fi
 
-echo "Starting testing $sol"
+echo "Starting testing $file"
 echo "Executable: $solution"
 echo ""
 
