@@ -23,6 +23,11 @@ elif [ $ext = "py" ]; then
     solution="python $file"
 elif [ $ext = "out" ]; then
     solution=$file
+elif [ $ext = $sol ]; then # maybe there is no extension on the solution file
+    solution=$sol
+else
+    echo "Can't figure out extension of $sol"
+    exit 1
 fi
 
 TESTS=problems/$problem/tests/[0-9][0-9][0-9]
@@ -32,7 +37,7 @@ else
     TESTS=problems/$problem/tests/$onlytest
 fi
 
-echo "Starting testing $file"
+echo "Starting testing $sol"
 echo "Executable: $solution"
 echo ""
 

@@ -6,34 +6,34 @@
 \usepackage{parskip}
 \usepackage{wrapfig}
 \usepackage{color}
-\usepackage{todonotes}
+\usepackage{hyperref}
+\usepackage[textsize=tiny]{todonotes}
 
-\contestshortname{Sample}
-\contestname{Sample Contest}
+\contestshortname{Practice Round}
+\contestname{Practice Round}
 %\contestlogo{sample_logo.png}
-%\location{ Location, date }
-%\contestinfo{}
+\location{ \today }
+\contestinfo{ % some contest info, e.g. authors
+}
 \problemlanguage{.en}
 
-\newif\ifdraft
-\drafttrue
-\newcommand{\hnote}[1]{%
-	\ifdraft {\color{red}[H: #1 ]}
-	\fi
-}
-\newcommand{\enote}[1]{%
-	\ifdraft {\color{blue}[E: #1 ]}
-	\fi
-}
+\newcommand{\etodo}[1]{\todo[color=yellow]{#1}}
+\newcommand{\etodoi}[1]{\todo[inline,color=yellow]{#1}}
+\newcommand{\htodo}[1]{\todo[color=orange]{#1}}
+\newcommand{\htodoi}[1]{\todo[inline,color=orange]{#1}}
+
+\DeclareUnicodeCharacter{2212}{-}
 
 \begin{document}
 \coverpage
 
 % problem name and number of sample tests
-\includeproblem{sum}{2}
-\includeproblem{guess-the-number}{0}
+\includeproblem{practice-sum}{2}
+\includeproblem{practice-letter-b}{2}
+\includeproblem{practice-guess-the-number-interactive}{0}
+\includeproblem{practice-happy-easter-output-only}{0}
 
 \newpage
-\input{interactive-info}
+\input{info-sheet}
 
 \end{document}

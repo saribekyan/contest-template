@@ -47,7 +47,8 @@
 \RequirePackage{url}              % Urls
 \RequirePackage[normalem]{ulem}   % \sout
 \RequirePackage{tikz}             % Circles
-\RequirePackage[colorlinks=true,implicit=false]{hyperref}
+\RequirePackage[colorlinks=true,implicit=false,linkcolor=cyan,urlcolor=cyan]{hyperref}
+
 \ifplastex\else
 \RequirePackage{pgffor}
 \fi
@@ -67,8 +68,8 @@
 \licenseblurb{}
 \problemlanguage{}
 \contestinfo{
-      Time limit for all problems: 1 seconds\footnote{Unless otherwise specified in the problem.} \\ % hacky
-      Memory limit for all problems: 256MB \\ % hacky
+      Time limit for all problems: 2 seconds\footnote{Unless otherwise specified in the problem.} \\ % hacky
+      Memory limit for all problems: 128MB \\ % hacky
       \vspace{15pt}
       \Large\sf
       Problems are not ordered by difficulty.\\
@@ -148,11 +149,11 @@
     \vspace{0.5cm}
     \fi
     %
-    \Huge{\contentsname}\\
+    \Large{\contentsname\footnote{ See \hyperlink{info-sheet}{the last page} for general information about the problems. }}\\
     \vspace{1.0cm}
-    \renewcommand{\baselinestretch}{1.333333}\Large
+    \renewcommand{\baselinestretch}{1.333333}\large
     \@starttoc{toc}
-    \renewcommand{\baselinestretch}{0.75}\Large
+    \renewcommand{\baselinestretch}{0.75}\large
 
     \vfill
     {
@@ -251,8 +252,9 @@
   \def\@problemid{#1}
 }
 
-\newcommand{\problemname}[1]{
-  \def\@problemname{#1}
+\newcommand{\problemname}[2][]{
+  \def\@problemname{#2}
+  \def\@problemtype{#1}
   \problemheader{\@problemname}{\@problemid}
 }
 
@@ -267,8 +269,9 @@
   }}
 
 \newcommand{\problemheader}[2]{
+  \hypertarget{\@problemid}{}
   \begin{minipage}{\textwidth}
-    \begin{minipage}{0.5\textwidth}
+    \begin{minipage}{1.0\textwidth}
       \textsf{
         \\[0mm]
         \if@problemnumbers {\huge Problem \problemnumber\\[3mm]} \fi
@@ -283,26 +286,11 @@
         \\[5mm]
       }
     \end{minipage}
-    \hfill
-    \IfFileExists{#2/problem_statement/artwork.jpg}{
-      \begin{minipage}{0.5\textwidth}
-        \begin{flushright}
-          \includegraphics[height=4cm,valign=t]{#2/problem_statement/artwork.jpg}
-        \end{flushright}
-      \end{minipage}
-    }{
-     \IfFileExists{#2/problem_statement/artwork.png}{
-      \begin{minipage}{0.5\textwidth}
-        \begin{flushright}
-          \includegraphics[height=4cm,valign=t]{#2/problem_statement/artwork.png}
-        \end{flushright}
-      \end{minipage}
-    }{}}
   \end{minipage}
   \addtocontents{toc}{
     \if@problemnumbers \problemcircle{\problemnumber} \fi
     % \if@problemnumbers \textbf{\problemnumber} \fi
-    & \@problemname \\}%
+    & \protect\hyperlink{\@problemid}{\@problemname} & \hspace{4em} \@problemtype \\}%
 }
 
 %% Commands related to sample data
@@ -422,7 +410,7 @@
   \pagestyle{problem}
 
   % Set up table of contents for cover page
-  \addtocontents{toc}{\protect\begin{tabular}{cl}}
+  \addtocontents{toc}{\protect\begin{tabular}{cll}}
 }
 
 \AtEndDocument{
